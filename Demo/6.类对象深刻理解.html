@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function C1( name ) {
+				if(name)this.name = name
+			}
+			
+			function C2( name ) {
+				this.name = name
+			}
+			
+			function C3( name ) {
+				this.name = name || "John"
+			}
+			console.dir('-------1-------');
+			C1.prototype.name = "Tom"
+			C2.prototype.name = "Tom"
+			C3.prototype.name = "Tom"
+			console.dir(C1);
+			console.dir(C2);
+			console.dir(C3);
+			
+			console.dir('-------2-------');
+			console.dir(new C1())
+			console.dir(new C2())
+			console.dir(new C3())
+			console.dir(new C1().name)
+			console.dir(new C2().name)
+			console.dir(new C3().name)
+			
+
+			
+			
+		</script>
+	</body>
+</html>

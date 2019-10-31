@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function clone(obj) {
+				let result =  obj instanceof Array ? [] : {}
+				for (let key in obj) {
+					if(obj[key] instanceof Array) {
+						result[key] = clone(obj[key])
+					} else if (obj[key] instanceof Object) {
+						result[key] = clone(obj[key])
+					} else {
+						result[key] = obj[key]
+					}
+				}
+				return result
+			}
+			//----对象测试----------
+			let obj = {a:"aa", b: {b1: "b1", b2: {b21: "b21"}}}
+			let obj2 = clone(obj)
+			obj2.b.b2.b21 = "999999999999"
+			console.log(obj);
+			console.log(obj2);
+			
+			//----数组测试----------
+			let arr = ["a", {b1: "b1"}]
+			let arr2 = clone(arr)
+			arr2[1].b1 = "9999999999999"
+			console.log(arr);
+			console.log(arr2);
+		</script>
+	</body>
+</html>

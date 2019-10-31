@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function clone(Obj) {
+			    var buf;   
+			    if (Obj instanceof Array) {
+			        buf = [];  // 创建一个空的数组
+			        var i = Obj.length;
+			        while (i--) {
+			            buf[i] = clone(Obj[i]);
+			        }
+			        return buf;
+			    } else if (Obj instanceof Object){
+			        buf = {};  // 创建一个空对象
+			        for (var k in Obj) {  // 为这个对象添加新的属性
+			            buf[k] = clone(Obj[k]);
+			        }
+			        return buf;
+			    }else{
+			        return Obj;
+			    }
+			}
+			
+			// -------------测试---------------------
+			let obj = {
+				a: "aaa",
+				b: {b1: "bbb111"}
+			}
+			let obj2 = clone3(obj)
+			obj2.b.b1 = "9999999"
+			console.log(obj, 'obj')
+			console.log(obj2, 'obj2')
+			// ----------------------------------
+			
+			// 方法二
+			function clone1(Obj) {
+				let buf
+				if(Obj instanceof Array) {
+					buf = []
+					Obj.forEach((item, index) => {
+						buf[index] = clone1(item)
+					})
+					return buf
+				} else if(Obj instanceof Object) {
+					buf = {}
+					for (var key in Obj) {
+						buf[key] = clone1(Obj[key])
+					}
+					return buf
+				} else {
+					return Obj
+				}
+			}
+			
+			
+			// 方法三
+			function clone3(obj){
+			    if(!obj ||typeof(obj) != 'object') return obj;
+			    var r = Array.prototype.splice === obj.splice ? []:{};
+			    for(var i in obj){
+			        if(obj.hasOwnProperty(i)){
+			            r[i] = clone(obj[i]);
+			        }
+			    }
+			    return r ;
+			}
+		</script>
+	</body>
+</html>

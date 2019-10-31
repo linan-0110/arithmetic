@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			compute(100, 7)
+			function compute(headcount, n) {
+				let arr = [];
+				for(let i=0; i<headcount; i++) {
+					arr.push(i+1)
+				}
+				// console.log(arr);
+				
+				let surplus = headcount
+				let k = 0
+				while(surplus>1){
+					for(let i=0; i<n; i++) {
+						if(i === 6) {
+							var c = arr.splice(k,1)
+							surplus--
+							k--
+							console.log(c,surplus,k);
+						}
+						k += 1
+						console.log(k);
+						if(k==arr.length-1){k=0}
+					}
+				}
+				
+				console.log(arr);
+				
+			}
+			
+			// -------------------方法二---------------------------
+			
+			// let x=Joseph(10,3);  
+			// console.log("最后一个数为：" + x)
+			// function Joseph(n,m)/*计算约瑟夫环的递归函数*/  
+			// {  
+			// 	if(n<=1||m<=1)  
+			// 		return -1;  
+			// 	if(n==2)  
+			// 	{  
+			// 		if(m%2==0)  
+			// 			return 1;  
+			// 		else  
+			// 			return 2;  
+			// 	}  
+			// 	else  
+			// 	{  //1,2,4,5,7,8,10,  11,12,13,14,15,16,17,18,19
+			// 		console.log(n,m);						//3,3
+			// 		let t = (Joseph(n-1,m)+m-1)%n+1;		//
+			// 		console.log(n,m,t);						//3,3,2
+			// 		return t								//
+			// 	}
+			// }  
+		</script>
+	</body>
+</html>

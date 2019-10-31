@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function currying(add) {
+				return function(...args) {
+					if (args.length == 0) {
+						return add(...args)
+					}
+					return currying(add.bind(null, ...args))
+				}
+			}
+
+			function add(...args) {
+				return args.reduce((total, num) => {
+					return total + num
+				})
+			}
+
+			add = currying(add)
+			console.log( add(1)() ); //1
+			console.log( add(1)(2,3)() ); //6
+			console.log( add(1)(2, 2, 2, 9, 0, 78, 89)(7, 8, 5)(110, 88)(99)() );  //500
+			
+		</script>
+	</body>
+</html>

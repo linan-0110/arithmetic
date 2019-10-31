@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function sumBigNumber(a, b) {
+			  var res = '',
+			    temp = 0;
+			  a = a.split('');
+			  b = b.split('');
+			  while (a.length || b.length || temp) {
+			    temp += ~~a.pop() + ~~b.pop();  //两个~~是转为数字
+			    res = (temp % 10) + res;
+			    temp = temp > 9;
+			  }
+			  return res.replace(/^0+/, ''); //若字符串开头有0会被全部替换
+			}
+			
+			console.log(sumBigNumber("55","45"));
+		</script>
+	</body>
+</html>

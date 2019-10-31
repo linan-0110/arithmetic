@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/* 有1分， 2 分， 5 分， 10 分四种硬币， 每种硬币数量无限， 给定n分钱(n <= 100000)， 有多少中组合可以组成n分钱？
+
+			输入描述:
+				输入整数n.(1 <= n <= 100000)
+
+			输出描述:
+				输出组合数， 答案对1e9 + 7 取模。
+
+			输入例子1:
+				13
+
+			输出例子1:
+				16 */
+			console.time()
+			console.log(computer(1000));
+			console.timeEnd()
+
+			function computer(num) {
+				let num1 = num,
+					num2 = Math.floor(num / 2),
+					num5 = Math.floor(num / 5),
+					num10 = Math.floor(num / 10),
+					sum = 0
+				for (let i1 = 0; i1 <= num1; i1++) {
+					if (num2 == 1) {
+						if (i1 == num) {
+							sum++
+						}
+					} else {
+						for (let i2 = 0; i2 <= num2; i2++) {
+							if (num2 <= 2) {
+								if (i1 + i2 * 2 > num) break
+								if (i1 + i2 * 2 == num) {
+									sum++
+								}
+							} else {
+								for (let i5 = 0; i5 <= num5; i5++) {
+									if (num2 <= 5) {
+										if (i1 + i2 * 2 + i5 * 5 > num) break
+										if (i1 + i2 * 2 + i5 * 5 == num) {
+											sum++
+										}
+									} else {
+										for (let i10 = 0; i10 <= num10; i10++) {
+											if (i1 + i2 * 2 + i5 * 5 + i10 * 10 > num) break
+											if (i1 + i2 * 2 + i5 * 5 + i10 * 10 == num) {
+												sum++
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				return sum
+			}
+		</script>
+	</body>
+</html>

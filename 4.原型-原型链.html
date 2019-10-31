@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var Person = function(name) {
+				this.name = name; // tip: 当函数执行时这个 this 指的是谁？
+				this.get1 = function() {
+					return "this.get1"
+				}
+			};
+			Person.prototype.getName = function() {
+				return this.name; // tip: 当函数执行时这个 this 指的是谁？
+			}
+			var person1 = new Person('Mick');
+			person1.getName(); //Mick
+			console.log(person1);
+			console.log(person1.get1());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function foo(c) {
+				this.b = 100;
+				console.log(this.a);
+				console.log(c);
+				return this.a;
+			}
+
+			var func = foo.bind({
+				a: 1
+			}, 20);
+			 //undefined 20，通过new创建对象func，bind绑定的c依旧起作用
+			console.dir('function' == 'function');
+			
+			let arr11 = [1,2,3,4]
+			let res = arr11.push(1)
+			console.log(res);
+		</script>
+	</body>
+</html>

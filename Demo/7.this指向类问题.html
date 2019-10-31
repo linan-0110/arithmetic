@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.number = 1
+			let obj = {
+				number: 4,
+				db1: (function() {
+					this.number *= 2
+					return function() {
+						this.number *= 2
+					}
+				})()
+			}
+			var db1 = obj.db1  //window.number= 1  obj.number=8
+			db1() //window.number= 2  obj.number=8
+			obj.db1() //window.number= 4  obj.number=8
+			
+			console.log(window.number, obj.number) //4  8
+		</script>
+	</body>
+</html>

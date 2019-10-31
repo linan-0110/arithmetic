@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// foo("get-element-by-id")
+			foo("abc-def")
+			
+			
+			function foo(line) {
+				let strArr = line.split('-')
+				let strArr2 = []
+				strArr2.push(strArr[0])
+				for(let i = 1; i<strArr.length; i++) {
+					 let a = strArr[i].replace(/^[A-z]/,strArr[i].substr(0,1).toUpperCase())
+					 strArr2.push(a)
+				}
+				let result = strArr2.join('')
+				console.log(result[0].toUpperCase()+result.slice(1));
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>

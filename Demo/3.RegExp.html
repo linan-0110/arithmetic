@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let str = "125aa295aa35aa1"
+			let a = /^1[3456789]\d{9}$/.test(str)
+			let b = /(aa)/m.test(str)
+			console.log(b);
+			console.dir(RegExp.$1);
+			console.dir(RegExp.$2);
+			console.dir(RegExp.$3);
+			console.dir(RegExp.$4);
+			
+			
+			// console.log(a)
+			
+		</script>
+	</body>
+</html>
