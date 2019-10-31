@@ -70,7 +70,37 @@
 
 
 		<script type="text/javascript">
-
+			var entry = {
+				a: {
+					b: {
+						c: {
+							dd: 'abcdd'
+						}
+					},
+					d: {
+						xx: 'adxx'
+					},
+					e: 'ae'
+				}
+			}
+			
+			function transform(entryObj) {
+				let output = {}
+				fn(entryObj)
+				return output
+				
+				function fn(obj, temp_key = '') {
+					for (let key in obj) {
+						if(typeof obj[key] == 'object') {
+							fn(obj[key], temp_key + key + '.')
+						} else {
+							output[temp_key + key] = obj[key]
+						}
+					}
+				}
+			}
+			
+			console.log(transform(entry));
 		</script>
 	</body>
 </html>
