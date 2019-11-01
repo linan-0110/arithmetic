@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>展开对象</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/* 题目 */
+			/* var entryObj = {
+				a: {
+					b: {
+						c: {
+							dd: 'abcdd'
+						}
+					},
+					d: {
+						xx: 'adxx'
+					},
+					e: 'ae'
+				}
+			}
+			
+			// 要求转换成如下对象
+			var outputObj = {
+				'a.b.c.dd': 'abcdd',
+				'a.d.xx': 'adxx',
+				'a.e': 'ae'
+			} */
+			
+			/* 开始 */
+			
+			var entryObj = {
+				a: {
+					b: {
+						c: {
+							dd: 'abcdd'
+						}
+					},
+					d: {
+						xx: 'adxx'
+					},
+					e: 'ae'
+				}
+			}
+			
+			function transform(entryObj) {
+				let outputObj = {} //输出对象
+				fn(entryObj)
+				return outputObj
+			
+				function fn(obj, temp_key = '') { //temp_key--临时存放属性名
+					for (let key in obj) {
+						if (typeof obj[key] == 'object') {
+							fn(obj[key], temp_key + key + '.')
+						} else {
+							outputObj[temp_key + key] = obj[key]
+						}
+					}
+				}
+			}
+			console.log(transform(entryObj)) //打印测试
+			
+		</script>
+	</body>
+</html>

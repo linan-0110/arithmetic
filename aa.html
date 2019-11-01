@@ -70,37 +70,38 @@
 
 
 		<script type="text/javascript">
-			var entry = {
-				a: {
-					b: {
-						c: {
-							dd: 'abcdd'
-						}
-					},
-					d: {
-						xx: 'adxx'
-					},
-					e: 'ae'
-				}
-			}
+			/* 如传入的数组元素为[123, "meili", "123", "mogu", 123]，则输出：[123, "meili", "123", "mogu"]
 			
-			function transform(entryObj) {
-				let output = {}
-				fn(entryObj)
-				return output
-				
-				function fn(obj, temp_key = '') {
-					for (let key in obj) {
-						if(typeof obj[key] == 'object') {
-							fn(obj[key], temp_key + key + '.')
-						} else {
-							output[temp_key + key] = obj[key]
-						}
-					}
-				}
-			}
+			如传入的数组元素为[123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"]，则输出：[123, [1, 2, 3], [1, "2", 3], "meili"]
 			
-			console.log(transform(entry));
+			如传入的数组元素为[123, {a: 1}, {a: {b: 1}}, {a: "1"}, {a: {b: 1}}, "meili"]，则输出：[123, {a: 1}, {a: {b: 1}}, {a: "1"}, "meili"] */
+			
+			
+			function unRepeat(arr) {
+				// return [...new Set(arr)]
+				const resObj = {};
+				    const res = [];
+				    arr.forEach((item) => {
+				        const key = item + JSON.stringify(item);
+				        if (!resObj[key]) {
+				            res.push(item);
+				            resObj[key] = item;
+				        }
+				    })
+				    return res;
+			}
+			console.log(unRepeat([123, "meili", "123", "mogu", 123]));
+			console.log(`<<- [123, "meili", "123", "mogu"] ->>`);
+			console.log('');
+			
+			console.log(unRepeat([123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"]));
+			console.log(`<<- [123, [1, 2, 3], [1, "2", 3], "meili"] ->>`);
+			console.log('');
+			
+			console.log(unRepeat([123, {a: 1}, {a: {b: 1}}, {a: "1"}, {a: {b: 1}}, "meili"]));
+			console.log(`<<- [123, {a: 1}, {a: {b: 1}}, {a: "1"}, "meili"] ->>`);
+			console.log('');
+			
 		</script>
 	</body>
 </html>
