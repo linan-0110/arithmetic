@@ -4,27 +4,33 @@
 		<meta charset="utf-8">
 		<title></title>
 		<style type="text/css">
-			div{
-				height: 100px;
-			}
-			.box1{
-				background-color: #FF0000;
-				width: 200px;
-				float: left;
-			}
-			.box2{
-				background-color: #00FFFF;
-				width: 250px;
-				/* float: right; */
-			}
-			.center{
-				background-color: #999999;
-			}
+			
 		</style>
 	</head>
 	<body>
-		<div class="box1"></div>
-		<div class="box2"></div>
-		<!-- <div class="center"></div> -->
+		<script type="text/javascript">
+			const arr = ["2019","云","栖","音","乐","节"];
+			let ProxyArray = new Proxy(arr,{
+			    get:function(target, name, value, receiver) {
+			        console.log("取值")
+			        
+			        return Reflect.get(target,name);
+			    },
+			    set: function(target, name, value, receiver) {
+			       console.log("赋值")
+				   console.log(target, '||=>target')
+				   console.log(name, '||=>name')
+				   console.log(value, '||=>value')
+				   console.log(receiver, '||=>receiver')
+			       Reflect.set(target,name, value, receiver);;
+			    }
+			 })
+			 const index = ProxyArray[0];
+			 //取值
+			 ProxyArray[0]="2050"
+			 //赋值
+			 console.log(arr);
+			
+		</script>
 	</body>
 </html>
