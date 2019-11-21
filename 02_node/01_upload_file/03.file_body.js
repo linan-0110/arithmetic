@@ -28,7 +28,7 @@ let dataList = [
 ];
 
 router
-    .get("/data", (req, res) => {
+    .get("/", (req, res) => {
         // index.html 是当前文件夹 views 下的 index.html
         res.render('index.html', { list: dataList });
     })
@@ -41,9 +41,13 @@ router
         form.keepExtensions = true;
         
         form.parse(req, (err, fields, files) => {
-            console.log(fields);
             console.log("-------");
-            console.log(files);
+            // console.log(fields);
+            let name = fields.name;
+            let fileName = path.parse(files.headImg.path).base;
+            // let fileName = path.resolve(files.headImg.path).__dirname;
+            dataList.push({name, img: fileName});
+            res.redirect('/');
         });
     })
 
