@@ -35,17 +35,16 @@ router
     .post('/add', (req, res, next) => {
         // 解析文件用 formidable
         let form = new formidable.IncomingForm();
-        // 指定上传路径
+        //  配置 指定上传路径
         form.uploadDir = path.join(__dirname, '/images');
-        // 保持原有后缀名
+        //  配置 保持原有后缀名
         form.keepExtensions = true;
         
         form.parse(req, (err, fields, files) => {
-            console.log("-------");
+            console.log(files);
             // console.log(fields);
             let name = fields.name;
             let fileName = path.parse(files.headImg.path).base;
-            // let fileName = path.resolve(files.headImg.path).__dirname;
             dataList.push({name, img: fileName});
             res.redirect('/');
         });
