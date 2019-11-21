@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .img{
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        {{ each list }}
+        <li>
+            <img src="{{ $value.img }}" class="img">
+            {{ $value.name }}
+        </li>
+        {{ /each }}
+    </ul>
+
+    // 上传文件必须加 enctype="multipart/form-data" 属性
+    <form action="/add" method="post" enctype="multipart/form-data">
+        名字：<input type="text" name="name" id="">
+        头像：<input type="file" name="headImg" id="">
+        <button>提交</button>
+    </form>
+
+
+    <script src="index.js"></script>
+</body>
+</html>
