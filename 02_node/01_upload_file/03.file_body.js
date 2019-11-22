@@ -56,3 +56,17 @@ router
 // app.use((err, req, res, next) => {
 //     res.send("<h1>页面不在了<a href='/'>去首页看看</a></h1>")
 // })
+
+db.test_start.save({contry: "中国", name: "张三", score: 77});
+db.test_start.save({contry: "中国", name: "王是", score: 44});
+db.test_start.save({contry: "中国", name: "订单", score: 21});
+db.test_start.save({contry: "中国", name: "李四", score: 92});
+db.test_start.save({contry: "美国", name: "张二麻子", score: 66});
+db.test_start.save({contry: "美国", name: "aaa", score: 66});
+db.test_start.save({contry: "美国", name: "bbb", score: 29});
+db.test_start.save({contry: "美国", name: "ccc", score: 56});
+db.test_start.save({contry: "美国", name: "ddd", score: 80});
+db.test_start.save({contry: "美国", name: "eee", score: 23});
+
+
+db.test_start.find({score: {$gt: 80}}) // score大于80
