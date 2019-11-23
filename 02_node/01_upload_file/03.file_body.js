@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const formidable = require('formidable');
 const path = require('path');
 const $db = require('./dbTools')
