@@ -1,4 +1,3 @@
-// import express from 'express'
 const express = require('express');
 
 let server1 = express();
