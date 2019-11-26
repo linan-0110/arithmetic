@@ -10,22 +10,40 @@ const path = require('path')
 let app = new Koa()
 let router = new Router()
 
-// 加入socket.io
-const IO = require( 'koa-socket' )
- 
+/* ---------- 加入socket.io ---------- */
+const IO = require('koa-socket')
+
 const io = new IO()
- 
+
+global.sessionStore = {}
+
 // 附加到app上
-io.attach( app )
- 
-io.on( 'connection', ( context, data ) => {
-  console.log( 'socket-server连接上！', data )
-  // 广播发送数据
-  io.broadcast('msg1', {msg: "socket-server"})
+io.attach(app)
+
+io.on('connection', (context, data) => {
+    console.log('socket-server连接上！', data)
+    // 广播发送数据
+    io.broadcast('msg1', { msg: "socket-server" })
+})
+// 接收client发送来的信息
+io.on('sendMsg', (context, data) => {
+    // context.socket 是客户端的那个链接
+    // context.socket.socket.id 是唯一标识（做私聊用）
+    console.log("client发送来的消息", data.newContentText);
+    
+    let userInfo = query(context.socket.socket.id)
+    console.log("----++---------");
+    console.log(userInfo);
+
+})
+io.on('login', (context, data) => {
+    console.log("client发送来的消息", data.id);
+    global.sessionStore[data.id] = {}
+    global.sessionStore[data.id].socketId = context.socket.socket.id
+    // sessionStore[data.id].socketId = context.socket.socketId
 })
 
-
-
+/* ---------- ---------- ---------- */
 
 
 
@@ -53,18 +71,26 @@ router.get('/', (ctx) => {
     .post('/login', (ctx) => {
         let { username, password } = ctx.request.body
         ctx.session.user = { username }
-
+        // 生成一个唯一标识
+        let id = Date.now()
+        ctx.session.user.id = id
+        global.sessionStore[id] = { username }
         ctx.redirect('/list')
     })
     .get('/list', (ctx) => {
-        ctx.render('list', { username: ctx.session.user.username, msgs })
+        ctx.render('list',
+            {
+                id: ctx.session.user.id,
+                username: ctx.session.user.username,
+                msgs
+            })
     })
-    /* .post('/addNewContent', (ctx) => {
-        let username = ctx.session.user.username || '用户未登录'
-        let { newContentText } = ctx.request.body
-        msgs.push({ username, content: newContentText })
-        ctx.body = msgs
-    }) */
+/* .post('/addNewContent', (ctx) => {
+    let username = ctx.session.user.username || '用户未登录'
+    let { newContentText } = ctx.request.body
+    msgs.push({ username, content: newContentText })
+    ctx.body = msgs
+}) */
 
 
 /* ---------- end ---------- */
@@ -103,3 +129,18 @@ app.use(router.allowedMethods())
 app.listen(8888, () => {
     console.log("服务器启动在：loaclhost:8888");
 })
+
+
+
+
+/* 工具函数 */
+// 查找 global.sessionStore 里面包含对应 socketId 的对象
+function query(socketId) {
+    console.log(socketId);
+    console.log(global.sessionStore);
+    Object.values(global.sessionStore).forEach(value => {
+        if(value.socketId == socketId) {
+            return value
+        }
+    });
+}
