@@ -30,17 +30,21 @@ io.on('sendMsg', (context, data) => {
     // context.socket 是客户端的那个链接
     // context.socket.socket.id 是唯一标识（做私聊用）
     console.log("client发送来的消息", data.newContentText);
-    
+    console.log(global.sessionStore)
+    // msgs.push({username: , content: data.newContentText})
     let userInfo = query(context.socket.socket.id)
     console.log("----++---------");
     console.log(userInfo);
+    console.log(msgs)
+    io.broadcast('msg1', msgs)
 
 })
 io.on('login', (context, data) => {
-    console.log("client发送来的消息", data.id);
-    global.sessionStore[data.id] = {}
+    console.log("client发送来的id", data.id);
+    
     global.sessionStore[data.id].socketId = context.socket.socket.id
-    // sessionStore[data.id].socketId = context.socket.socketId
+    console.log(global.sessionStore)
+    // global.sessionStore[data.id].username = context.socket.socket.id
 })
 
 /* ---------- ---------- ---------- */
@@ -59,8 +63,6 @@ render(app, {
 let msgs = [
     { username: '小魔女', content: '你过来呀！！！' },
     { username: '大大', content: 'wwwww！！！' },
-    { username: '呃呃', content: '333333' },
-    { username: '刚刚', content: 'ccccc' },
     { username: '烦烦烦', content: '33333' }
 ]
 
@@ -75,6 +77,8 @@ router.get('/', (ctx) => {
         let id = Date.now()
         ctx.session.user.id = id
         global.sessionStore[id] = { username }
+        console.log("-----登录-----")
+        console.log(global.sessionStore)
         ctx.redirect('/list')
     })
     .get('/list', (ctx) => {
@@ -136,11 +140,11 @@ app.listen(8888, () => {
 /* 工具函数 */
 // 查找 global.sessionStore 里面包含对应 socketId 的对象
 function query(socketId) {
-    console.log(socketId);
-    console.log(global.sessionStore);
-    Object.values(global.sessionStore).forEach(value => {
+    let queryObj = {}
+    Object.values(global.sessionStore).some(value => {
         if(value.socketId == socketId) {
-            return value
+            queryObj = value
         }
     });
+    return queryObj
 }
