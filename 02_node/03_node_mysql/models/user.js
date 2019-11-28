@@ -2,7 +2,7 @@ const { Q } = require('../units/mysql/db')
 
 module.exports = {
     async createTable() {
-        let res = await Q(`CREATE TABLE IF NOT EXISTS  user(id int,user varchar(20),password varchar(30), mobile varchar(20))`,[])
+        let res = await Q(`CREATE TABLE IF NOT EXISTS  user(id int,user varchar(20),password varchar(30), mobile varchar(20))`)
         return res
     },
     async insertUserInfo(data) {
