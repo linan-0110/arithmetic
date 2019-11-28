@@ -1,12 +1,17 @@
 const { Q } = require('../units/mysql/db')
 
 module.exports = {
-    async createTable() {
-        let res = await Q(`CREATE TABLE IF NOT EXISTS  user(id int,user varchar(20),password varchar(30), mobile varchar(20))`)
-        return res
+    createTable() {
+        return Q(`create table if not exists user(
+            id int auto_increment primary key,
+            user varchar(20),
+            password varchar(30),
+            mobile varchar(20),
+            create_time datetime)
+            `)
     },
-    async insertUserInfo(data) {
-        let res = await Q(`insert into user(id, user, password, mobile ) values (?,?,?,?)`,[...data])
-        return res
+    insertRegisterUserInfo(data) {
+        return Q(`insert into user(${Object.keys(data)}) 
+            values (${''})`, Object.values(data))
     }
 }
