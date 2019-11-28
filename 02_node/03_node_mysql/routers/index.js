@@ -8,9 +8,9 @@ router.get('/', (ctx) => {
     ctx.render('index')
 })
 .post('/user-addTable', (ctx) => {
-    let a = createTable()
-    console.log(a)
-    ctx.body = a
+    let result = createTable()
+    console.log(result)
+    ctx.body = result
 })
 .post('/user-register', async (ctx) => {
     let { user, password, mobile } = ctx.request.body
