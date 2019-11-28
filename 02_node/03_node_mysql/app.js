@@ -2,13 +2,10 @@ const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const path = require('path')
 
-
 let app = new Koa
 
-
-/* 服务器渲染 */
+/* 服务器渲染 配置 */
 const render = require('koa-art-template')
-// render 配置 
 render(app, {
     // render 查找页面的目录
     root: path.join(__dirname, 'views'),
