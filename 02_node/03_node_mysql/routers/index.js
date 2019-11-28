@@ -12,12 +12,12 @@ router.get('/', (ctx) => {
     console.log(a)
     ctx.body = a
 })
-.post('/user-register',async (ctx) => {
+.post('/user-register', async (ctx) => {
     let { user, password, mobile } = ctx.request.body
     id++
-    let a = await insertUserInfo([id,user, password, mobile])
-    console.log(a)
-    ctx.body = {msg: 'OK'}
+    let result = await insertUserInfo([id,user, password, mobile])
+    console.log(result)
+    ctx.body = {msg: 'OK',dbmsg: result}
 })
 
 
