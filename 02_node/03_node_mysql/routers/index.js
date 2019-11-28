@@ -1,13 +1,25 @@
-const express = require('express')
+/* 路由 */
+const Router = require('koa-router')
+const { createTable, insertUserInfo } = require('../models/user')
+let router = new Router()
+let id = 0
 
-
-let router = express.Router()
-
-router.post('/', (req, res) => {
-    // const { username, password } = req.body
-    console.log(req.body)
-    res.send({msg: 'OK'})
-    
+router.get('/', (ctx) => {
+    ctx.render('index')
 })
+.post('/user-addTable', (ctx) => {
+    let a = createTable()
+    console.log(a)
+    ctx.body = a
+})
+.post('/user-register',async (ctx) => {
+    let { user, password, mobile } = ctx.request.body
+    id++
+    let a = await insertUserInfo([id,user, password, mobile])
+    console.log(a)
+    ctx.body = {msg: 'OK'}
+})
+
+
 
 module.exports = router
