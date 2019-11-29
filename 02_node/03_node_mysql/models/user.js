@@ -1,4 +1,4 @@
-const { Q } = require('../units/mysql/db')
+const { Q, P } = require('../units/mysql/db')
 
 module.exports = {
     createTable() {
@@ -11,7 +11,7 @@ module.exports = {
             `)
     },
     insertRegisterUserInfo(data) {
-        return Q(`insert into user(${Object.keys(data)}) 
-            values (${''})`, Object.values(data))
+        let objKeyArr = Object.keys(data)
+        return Q(`insert into user(${objKeyArr}) values (${P(objKeyArr.length)})`, Object.values(data))
     }
 }

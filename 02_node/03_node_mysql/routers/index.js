@@ -1,6 +1,8 @@
 /* 路由 */
 const Router = require('koa-router')
 const { createTable, insertRegisterUserInfo } = require('../models/user')
+const moment = require('moment')
+moment.locale('zh-cn')
 
 const router = new Router()
 
@@ -17,9 +19,13 @@ router.get('/', (ctx) => {
 })
 .post('/user-register', async (ctx) => {
     let { user, password, mobile } = ctx.request.body
-    let result = await insertRegisterUserInfo({user, password, mobile})
-    console.log(result)
-    ctx.body = {msg: 'OK',dbmsg: result}
+    let res = await insertRegisterUserInfo({user, password, mobile ,create_time: moment().format('YYYY-MM-DD HH:mm:ss')})
+    console.log(res)
+    if(res.warningCount === 0) {
+        ctx.body = {status: 0, msg: "注册成功请登录！"}
+    } else {
+        ctx.body = {status: 0, msg: "账号已经存在！"}
+    }
 })
 
 

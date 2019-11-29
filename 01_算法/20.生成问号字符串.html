@@ -6,7 +6,15 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			function(n)
+			function p(n) {
+				let str = ''
+				if(!n) return ''
+				for (let i = 0; i < n - 1; i++) {
+					str += "?,"
+				}
+				return str += "?"
+			}
+			
 		</script>
 	</body>
 </html>
