@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 输入一个整数N 输出所有和为N的连续正数序列
+			// 列如: 输入15
+			//		输出[[1,2,3,4,5],[4,5,6],[7,8]]
+			console.log(func(15))
+
+			function func(n) {
+				let resultArr = [],
+					tempArr = []
+				if (n <= 2) return resultArr
+				for (let i = 1; i <= (n - 1) / 2; i++) {
+					for (let j = i + 1; j <= (n + 1) / 2; j++) {
+						tempArr = createArr(i, j)
+						// console.log("--------------------------")
+						// console.log(i + "  ===  " + j)
+						// console.log(tempArr)
+						// console.log(sumArr(tempArr))
+
+						if (sumArr(tempArr) === n) {
+							resultArr.push(tempArr)
+						} else if (sumArr(tempArr) > n) {
+							break
+						}
+					}
+
+				}
+				return resultArr
+
+				// 创建p到q的连续数组数组 
+				function createArr(p, q) {
+					let arr = []
+					for (let i = p; i <= q; i++) {
+						arr.push(i)
+					}
+					return arr
+				}
+
+				// 求数组和
+				function sumArr(arr) {
+					return arr.reduce((sum, num) => {
+						return sum + num;
+					})
+				}
+			}
+		</script>
+	</body>
+</html>
