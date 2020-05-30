@@ -9,7 +9,7 @@
 			// 输入一个整数N 输出所有和为N的连续正数序列
 			// 列如: 输入15
 			//		输出[[1,2,3,4,5],[4,5,6],[7,8]]
-			console.log(func(15))
+			console.log(func(55))
 
 			function func(n) {
 				let resultArr = [],
@@ -22,7 +22,6 @@
 						// console.log(i + "  ===  " + j)
 						// console.log(tempArr)
 						// console.log(sumArr(tempArr))
-
 						if (sumArr(tempArr) === n) {
 							resultArr.push(tempArr)
 						} else if (sumArr(tempArr) > n) {
