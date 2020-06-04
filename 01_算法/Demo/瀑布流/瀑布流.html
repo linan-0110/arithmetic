@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.box {
+				width: 1000px;
+				background-color: #00FFFF;
+				border: 4px solid #000;
+			}
+			
+/* ============================================================================= */
+			/* .box {
+				margin: 10px;
+				column-count: 3;
+				column-gap: 10px;
+			}
+
+			.item {
+				margin-bottom: 10px;
+			}
+
+			.item img {
+				width: 100%;
+				height: 100%;
+			} */
+
+
+/* ============================================================================= */
+			.box {
+				display: flex;
+				flex-direction: column;
+				flex-flow: column wrap;
+				height: 2000px;
+			}
+
+			.item {
+				padding: 10px;
+				width: calc(100%/3 - 25px);
+			}
+
+			.item img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="item">
+				<img src="./img/1.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/2.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/3.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/4.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/5.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/6.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/7.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/8.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/9.jpg" alt="" />
+			</div>
+			<div class="item">
+				<img src="./img/10.jpg" alt="" />
+			</div>
+
+		</div>
+	</body>
+
+</html>
