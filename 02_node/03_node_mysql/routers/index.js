@@ -27,7 +27,7 @@ router.get('/', (ctx) => {
             ctx.body = { status: 0, msg: "账号已经存在！" }
         }
     })
-    .get('/select-user-info', async (ctx) => {
+    .post('/select-user-info', async (ctx) => {
         let res = await selectUserInfo()
         if (res.warningCount === 0) {
             ctx.body = { status: 0, data: res, msg: "成功！" }

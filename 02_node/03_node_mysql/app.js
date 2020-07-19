@@ -4,6 +4,7 @@ const path = require('path')
 
 let app = new Koa
 
+
 /* 服务器渲染 配置 */
 const render = require('koa-art-template')
 render(app, {
@@ -21,6 +22,8 @@ app.use(bodyParser());
 const router = require('./routers')
 app.use(router.routes())
 app.use(router.allowedMethods()) // 处理 status 405 501 
+
+
 
 
 app.listen(8888, () => {
