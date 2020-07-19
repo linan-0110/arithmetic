@@ -3,7 +3,7 @@ const express = require('express');
 let server1 = express();
 
 server1.use((req, res, next) => {
-    res.send('express ok')
+    res.send({a:1,b:2,c:3})
 })
 
 server1.listen(8888, () => {

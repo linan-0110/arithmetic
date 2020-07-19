@@ -10,16 +10,16 @@ let app = new Koa();
 let router = new Router();
 
 router
-// .get('/', async (ctx, next) => {
-//     // fs.readFileSync('./index.html');
-//     ctx.set('content-type','text/html;charset=utf-8')
-//     ctx.body = await asyncReadFile('./index.html')
-//     next()
-// })
+.get('/', async (ctx, next) => {
+    // fs.readFileSync('./index.html');
+    ctx.set('content-type','text/html;charset=utf-8')
+    ctx.body = await asyncReadFile('./index.html')
+    next()
+})
 .post('/login', ctx => {
     let account = ctx.request.body.account;
     let password = ctx.request.body.password;
-    console.log();
+    console.log(ctx.request.body);
     if(account != "abc" || password != '123') {
         ctx.body = {
             ok: false,

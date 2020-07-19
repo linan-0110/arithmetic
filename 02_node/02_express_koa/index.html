@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
+
 <body>
     <h1>登录</h1>
     <form action="/login" method="POST">
-        <input type="text" name="account">
-        <input type="password" name="password">
+        <input type="text" name="account" id="account">
+        <input type="password" name="password" id="password">
         <input type="submit" value="登录">
     </form>
+    <button onclick="click1()">登录1</button>
+    <button id="login2">登录2</button>
+    <script>
+        window.onload = function () {
+
+        }
+        function click1() {
+            console.log(account.value)
+            console.log(password.value)
+            console.log("9999")
+        }
+        function click2() {
+            console.log(account.value)
+            console.log(password.value)
+            console.log("9999")
+        }
+        login2.addEventListener("click",() => {
+            console.log('1111')
+        })
+
+    </script>
 </body>
+
 </html>
