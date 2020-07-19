@@ -2,7 +2,7 @@ const DATABASE = {
     databas_test: {
         host: 'localhost',
         user: 'root',
-        password: '546260',
+        password: 'root',
         database: 'test'
     }
 }

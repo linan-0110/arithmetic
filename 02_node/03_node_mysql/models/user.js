@@ -13,5 +13,8 @@ module.exports = {
     insertRegisterUserInfo(data) {
         let objKeyArr = Object.keys(data)
         return Q(`insert into user(${objKeyArr}) values (${P(objKeyArr.length)})`, Object.values(data))
+    },
+    selectUserInfo() {
+        return Q(`select * from user`)
     }
 }
