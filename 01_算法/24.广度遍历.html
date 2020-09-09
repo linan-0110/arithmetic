@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const data = [
+				{
+					name: "a1",
+					children: [
+						{ name: "b1", children: [{ name: "e11" }] },
+						{ name: "c1", children: [{ name: "f11" }] },
+						{ name: "d1", children: [{ name: "g11" }] },
+					],
+				},
+				{
+					name: "a2",
+					children: [
+						{ name: "b2", children: [{ name: "e22" }] },
+						{ name: "c2", children: [{ name: "f22" }] },
+						{ name: "d2", children: [{ name: "g22" }] },
+					],
+				},
+			];
+			console.log(getName(data))
+			function getName(data) {
+				let result = [];
+				let queue = data;
+				while (queue.length > 0) {
+					[...queue].forEach((child) => {
+						result.push(child.name);
+						child.children && queue.push(...child.children);
+						queue.shift();
+					});
+				}
+				return result
+			}
+		</script>
+	</body>
+</html>
