@@ -7,11 +7,13 @@
 	<body>
 		<script type="text/javascript">
 			function clone(obj) {
-				let result = obj instanceof Array ? [] : {}
+				let result = obj instanceof Array ? [] : {};
 				for (let key in obj) {
+					// console.log(obj[key])
+					// console.log(obj[key] instanceof Function || obj[key] instanceof RegExp || obj[key] instanceof Date)
 					if (obj[key] instanceof Array) {
 						result[key] = clone(obj[key])
-					} else if (obj[key] instanceof Function || RegExp || Date) {
+					} else if (obj[key] instanceof Function || obj[key] instanceof RegExp || obj[key] instanceof Date) {
 						result[key] = obj[key]
 					}  else if (obj[key] instanceof Object) {
 						result[key] = clone(obj[key])
