@@ -7,25 +7,24 @@
 	<body>
 		<script type="text/javascript">
 			class MyPromise {
-				static value = undefined
-				static status = 'pending'
-				constructor(callback) {
-				    callback(this.resolve, this.reject)
-				}
-				resolve = (val) => {
-					this.status = 'resolved'
-					this.value = val
-				}
-				reject = (val) => {
-					this.status = 'rejected'
-					this.value = val
-					// console.error(val)
+				value = undefined
+				status = 'pending'
+				constructor(resolver) {
+					let resolve = (val) => {
+						this.status = 'resolved'
+						this.value = val
+					}
+					let reject = (val) => {
+						this.status = 'resolved'
+						this.value = val
+					}
+					resolver(resolve, reject)
 				}
 				then = (callbackResolve, callbackReject) => {
 					if(callbackResolve && this.status === 'resolved') {
 						callbackResolve(this.value)
-					} else if(callbackReject && this.status === 'rejected') {
-						callbackReject(this.value)
+					} else if(callbackResolve && (this.status === 'rejected' || this.status === 'pending')) {
+						callbackResolve(this.value)
 					}
 					return this
 				}
@@ -36,9 +35,8 @@
 				}
 			}
 			
-			
 			new MyPromise((resolve, reject) => {
-				resolve('1111')
+				resolve('11111111')
 				// reject('22222')
 			}).then(res => {
 				console.log(res)
@@ -47,11 +45,6 @@
 			}).catch(err => {
 				console.error(err)
 			})
-			
-			console.dir(Promise)
-			console.dir(MyPromise)
-			// console.log(Promise.resolve("2222").then(res => {console.log(res)}))
-			// console.log(MyPromise.resolve("2222").then(res => {console.log(res)}))
 		</script>
 	</body>
 </html>
