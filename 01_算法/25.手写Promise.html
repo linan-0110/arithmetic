@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class MyPromise {
+				static value = undefined
+				static status = 'pending'
+				constructor(callback) {
+				    callback(this.resolve, this.reject)
+				}
+				resolve = (val) => {
+					this.status = 'resolved'
+					this.value = val
+				}
+				reject = (val) => {
+					this.status = 'rejected'
+					this.value = val
+					// console.error(val)
+				}
+				then = (callbackResolve, callbackReject) => {
+					if(callbackResolve && this.status === 'resolved') {
+						callbackResolve(this.value)
+					} else if(callbackReject && this.status === 'rejected') {
+						callbackReject(this.value)
+					}
+					return this
+				}
+				catch = (callbackReject) => {
+					if(callbackReject && this.status === 'rejected') {
+						callbackReject(this.value)
+					}
+				}
+			}
+			
+			
+			new MyPromise((resolve, reject) => {
+				resolve('1111')
+				// reject('22222')
+			}).then(res => {
+				console.log(res)
+			}, err => {
+				console.error(err)
+			}).catch(err => {
+				console.error(err)
+			})
+			
+			console.dir(Promise)
+			console.dir(MyPromise)
+			// console.log(Promise.resolve("2222").then(res => {console.log(res)}))
+			// console.log(MyPromise.resolve("2222").then(res => {console.log(res)}))
+		</script>
+	</body>
+</html>
