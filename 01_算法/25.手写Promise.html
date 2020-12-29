@@ -33,18 +33,48 @@
 						callbackReject(this.value)
 					}
 				}
+				static resolve = (value) => {
+					if (value instanceof this) return value
+					return new this(resolve => resolve(value)) 
+				}
+				static reject = (reason) => {
+					return new this((_, reject) => reject(reason))
+				}
+				static all = (promises) => {
+					let count = 0
+					let values = new Array(promises.length)
+					return new this((resolve, reject) => {
+						promises.forEach((promise, index) => {
+							this.resolve(promise).then(value => {
+								count++
+								values[index] = value
+								if (count === promises.length) resolve(values)
+							}, reason => reject(reason))
+						})
+					})
+				}
+				static race = (promises) => {
+					return new this((resolve, reject) => {
+						promises.forEach(promise => {
+							this.resolve(promise).then(value => resolve(value))
+						}, reason => reject(reason))
+					})
+				}
 			}
+			// 测试 ======================================================
+			Promise.resolve('Promise').then(res => {console.log(res)})
+			MyPromise.resolve('MyPromise').then(res => {console.log(res)})
 			
-			new MyPromise((resolve, reject) => {
-				resolve('11111111')
-				// reject('22222')
-			}).then(res => {
-				console.log(res)
-			}, err => {
-				console.error(err)
-			}).catch(err => {
-				console.error(err)
-			})
+			// new MyPromise((resolve, reject) => {
+			// 	resolve('11111111')
+			// 	// reject('22222')
+			// }).then(res => {
+			// 	console.log(res)
+			// }, err => {
+			// 	console.error(err)
+			// }).catch(err => {
+			// 	console.error(err)
+			// })
 		</script>
 	</body>
 </html>
